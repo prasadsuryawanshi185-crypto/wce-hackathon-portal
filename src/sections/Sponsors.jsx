@@ -1,134 +1,193 @@
 import { eventData } from '../data/event';
 import { SectionHeading } from '../components/SectionTag';
 import { Reveal } from '../components/Reveal';
-import { ArrowUpRight, ShieldCheck, Building2 } from 'lucide-react';
+import { ArrowUpRight, Building2, CheckCircle2, Sparkles, ExternalLink } from 'lucide-react';
 
 export function Sponsors() {
+  const { poweredBy, titleSponsor, organizer, institution } = eventData.sponsors;
+
   return (
-    <section id="sponsors" aria-label="Sponsors" className="relative section-pad overflow-hidden">
+    <section id="sponsors" aria-label="Sponsors and Partners" className="relative section-pad overflow-hidden">
+      {/* Background glow */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(39,220,203,0.04),transparent_55%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(102,232,195,0.06),transparent_60%)]"
       />
+
       <div className="container-custom relative z-10">
         <SectionHeading
-          index="SEC // 06"
-          kicker="Ecosystem"
-          title="Partner with the"
-          accent="arena."
-          description="Sponsorship tiers for 2027 are open."
+          index="SEC // 07"
+          kicker="Ecosystem & Partners"
+          title="SPONSORS &"
+          accent="ORGANIZERS."
+          description="Powered by industry leaders and backed by seven decades of autonomous engineering pedigree."
         />
 
-        {/* Sponsorship tiers - unique card design */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
-          {eventData.sponsorshipTiers.map((tier, i) => (
-            <Reveal key={tier.tier} delay={i * 0.08} y={24}>
-              <article className="relative glass-panel tech-corners rounded-sm p-7 h-full flex flex-col group overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#7547e8]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="font-mono text-[10px] tracking-[0.2em] text-[#7547e8] px-2.5 py-1 bg-[rgba(117,71,232,0.07)] border border-[rgba(117,71,232,0.2)] rounded-sm uppercase">
-                      {tier.badge}
-                    </span>
-                    <span className="status-dot pulse-dot" />
-                  </div>
-                  <h3 className="font-display font-semibold text-2xl text-[#f2f5f7] leading-tight mb-2">
-                    {tier.tier}
-                  </h3>
-                  <p className="font-mono text-[11px] text-[#7547e8] tracking-[0.16em] mt-2 uppercase mb-6">
-                    {tier.status}
-                  </p>
-                  <ul className="space-y-3 flex-1">
-                    {tier.perks.map((perk) => (
-                      <li key={perk} className="flex items-start gap-3 text-sm text-[#c7cfd9]">
-                        <span className="w-5 h-5 shrink-0 flex items-center justify-center rounded bg-[#7547e8]/10 text-[#7547e8]">
-                          <Building2 className="w-3 h-3" strokeWidth={2} />
-                        </span>
-                        <span className="leading-relaxed">{perk}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <a
-                    href={`mailto:${eventData.contactEmail}?subject=${encodeURIComponent(
-                      'WCE Hackathon 2027 — ' + tier.tier
-                    )}`}
-                    className="mt-7 pt-5 border-t hairline font-mono text-[11px] tracking-[0.18em] uppercase text-[#929caa] hover:text-[#7547e8] transition-colors flex items-center gap-2 group"
-                  >
-                    Request prospectus
-                    <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </a>
+        {/* Featured Key Partners Banner (Unstop & Zenteiq) */}
+        <div className="my-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+          {/* Powered By Unstop */}
+          <Reveal delay={0.1}>
+            <div className="group relative rounded-2xl border border-white/10 bg-[#0e0c1f]/85 p-8 sm:p-10 backdrop-blur-xl h-full flex flex-col justify-between hover:border-[#66E8C3]/50 transition-all duration-300">
+              <div>
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#66E8C3] font-bold block mb-6">
+                  // OFFICIAL ENGAGEMENT PLATFORM
+                </span>
+
+                <div className="h-24 sm:h-28 flex items-center justify-center bg-white/[0.03] border border-white/10 rounded-xl p-4 mb-6 group-hover:border-[#66E8C3]/30 transition-colors">
+                  <img
+                    src={poweredBy.logo}
+                    alt={poweredBy.name}
+                    className="max-h-full max-w-[200px] object-contain rounded-lg"
+                  />
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#7547e8]/30 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-              </article>
-            </Reveal>
-          ))}
+
+                <h3 className="font-display font-bold text-2xl text-white mb-2">
+                  Powered By {poweredBy.name}
+                </h3>
+                <p className="text-sm text-[#B9B4CA] leading-relaxed mb-6">
+                  {poweredBy.description}
+                </p>
+              </div>
+
+              <a
+                href={poweredBy.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary !py-2.5 !px-4 text-xs font-semibold self-start"
+              >
+                <span>Visit {poweredBy.name}</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </Reveal>
+
+          {/* Title Sponsor Zenteiq */}
+          <Reveal delay={0.18}>
+            <div className="group relative rounded-2xl border border-white/10 bg-[#0e0c1f]/85 p-8 sm:p-10 backdrop-blur-xl h-full flex flex-col justify-between hover:border-[#66E8C3]/50 transition-all duration-300">
+              <div>
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#66E8C3] font-bold block mb-6">
+                  // PROUD SPONSOR
+                </span>
+
+                <div className="h-24 sm:h-28 flex items-center justify-center bg-white/[0.03] border border-white/10 rounded-xl p-4 mb-6 group-hover:border-[#66E8C3]/30 transition-colors">
+                  <img
+                    src={titleSponsor.logo}
+                    alt={titleSponsor.name}
+                    className="max-h-full max-w-[220px] object-contain"
+                  />
+                </div>
+
+                <h3 className="font-display font-bold text-2xl text-white mb-2">
+                  {titleSponsor.name}
+                </h3>
+                <p className="text-sm text-[#B9B4CA] leading-relaxed mb-6">
+                  {titleSponsor.description}
+                </p>
+              </div>
+
+              <a
+                href={titleSponsor.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary !py-2.5 !px-4 text-xs font-semibold self-start"
+              >
+                <span>Explore {titleSponsor.name}</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </Reveal>
         </div>
 
-        {/* Past Partners - unique layout */}
-        <Reveal>
-          <div className="glass-panel rounded-sm p-8 sm:p-10">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-8 pb-6 border-b hairline">
-              <div>
-                <span className="font-mono text-[10px] text-[#7547e8] tracking-[0.22em] uppercase block mb-2">
-                  // Collaborative Legacy
-                </span>
-                <h4 className="font-display font-semibold text-2xl sm:text-3xl text-[#f2f5f7]">
-                  Past Ecosystem Partners
-                </h4>
-              </div>
-              <span className="font-mono text-[10px] tracking-[0.2em] text-[#5c6673] uppercase shrink-0">
-                Verified Collaborators
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {eventData.pastPartners.map((partner) => (
-                <div
-                  key={partner.name}
-                  className="relative panel-line rounded-sm p-6 flex items-center gap-6 group overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#7547e8]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="relative z-10 flex items-center gap-6 w-full">
-                    {partner.logo ? (
-                      <div className="w-28 h-14 shrink-0 flex items-center justify-center bg-white/[0.03] border hairline rounded-sm p-3">
-                        <img
-                          src={partner.logo}
-                          alt={partner.name}
-                          className="max-h-full max-w-full object-contain"
-                          loading="lazy"
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-28 h-14 shrink-0 flex items-center justify-center bg-white/[0.03] border hairline rounded-sm px-3">
-                        <span className="font-display font-semibold text-sm text-white text-center leading-tight">
-                          {partner.name}
-                        </span>
-                      </div>
-                    )}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="font-display font-semibold text-lg text-[#f2f5f7] truncate">
-                          {partner.name}
-                        </span>
-                        <ShieldCheck className="w-4 h-4 text-[#27dccb] shrink-0" />
-                      </div>
-                      <div className="font-mono text-[11px] text-[#7547e8] tracking-wide mb-1">
-                        {partner.role}
-                      </div>
-                      <div className="text-xs text-[#5c6673] leading-relaxed">
-                        {partner.note}
-                      </div>
-                    </div>
-                    <div className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <ArrowUpRight className="w-5 h-5 text-[#7547e8]" />
-                    </div>
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#7547e8]/30 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+        {/* Organized By Institutional Pedigree Banner */}
+        <Reveal delay={0.25}>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-8 sm:p-10 backdrop-blur-xl my-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              <div className="flex items-center gap-6">
+                <div className="w-20 h-20 rounded-2xl bg-white/[0.04] border border-white/10 p-3 flex items-center justify-center shrink-0">
+                  <img src={organizer.logo} alt={organizer.name} className="w-full h-full object-contain" />
                 </div>
-              ))}
+                <div>
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-[#66E8C3]">
+                    ORGANIZING STUDENT CHAPTER
+                  </span>
+                  <h4 className="font-display font-bold text-xl sm:text-2xl text-white mt-1">
+                    {organizer.name}
+                  </h4>
+                  <p className="text-xs text-[#8E89AA] mt-1">
+                    {organizer.description}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-6">
+                <div className="w-20 h-20 rounded-2xl bg-white/[0.04] border border-white/10 p-3 flex items-center justify-center shrink-0">
+                  <img src={institution.logo} alt={institution.name} className="w-full h-full object-contain" />
+                </div>
+                <div>
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-[#66E8C3]">
+                    HOST INSTITUTION
+                  </span>
+                  <h4 className="font-display font-bold text-xl sm:text-2xl text-white mt-1">
+                    {institution.name}
+                  </h4>
+                  <p className="text-xs text-[#8E89AA] mt-1">
+                    {institution.description}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </Reveal>
+
+        {/* Sponsorship Opportunities Grid */}
+        <div className="mt-16">
+          <div className="text-center max-w-xl mx-auto mb-10">
+            <h4 className="font-display font-bold text-2xl text-white mb-2">
+              Partner With WCE Hackathon
+            </h4>
+            <p className="font-mono text-xs text-[#8E89AA] uppercase tracking-wider">
+              Connect your brand and developer tools with 500+ top engineering candidates
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {eventData.sponsorshipTiers.map((tier, i) => (
+              <Reveal key={tier.tier} delay={i * 0.08} y={20}>
+                <div className="rounded-2xl border border-white/10 bg-[#0e0c1f]/70 p-7 h-full flex flex-col justify-between hover:border-[#66E8C3]/40 transition-colors">
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="font-mono text-[10px] uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-white/[0.04] border border-white/10 text-[#66E8C3]">
+                        {tier.badge}
+                      </span>
+                      <span className="text-xs font-mono text-[#8E89AA]">{tier.status}</span>
+                    </div>
+
+                    <h5 className="font-display font-bold text-xl text-white mb-4">
+                      {tier.tier}
+                    </h5>
+
+                    <ul className="space-y-3 mb-6">
+                      {tier.perks.map((perk, idx) => (
+                        <li key={idx} className="flex items-start gap-2.5 text-xs text-[#B9B4CA]">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#66E8C3] shrink-0 mt-0.5" />
+                          <span className="leading-relaxed">{perk}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <a
+                    href={`mailto:${eventData.contactEmail}?subject=Sponsorship%20Inquiry%20-%20${encodeURIComponent(tier.tier)}`}
+                    className="pt-4 border-t border-white/10 font-mono text-xs text-[#66E8C3] hover:underline flex items-center justify-between"
+                  >
+                    <span>Request Prospectus</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

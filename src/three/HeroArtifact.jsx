@@ -260,13 +260,13 @@ export function HeroArtifact({ shared, reducedMotion }) {
       />
       
       <mesh
-        geometry={new THREE.SphereGeometry(3.5, 32, 32)}
+        geometry={new THREE.SphereGeometry(3.6, 32, 32)}
         material={new THREE.MeshStandardMaterial({
-          color: '#05060b',
-          metalness: 0.1,
-          roughness: 0.9,
+          color: '#0D0B1C',
+          metalness: 0.08,
+          roughness: 0.92,
           transparent: true,
-          opacity: 0.03,
+          opacity: 0.05,
           side: THREE.BackSide,
           depthWrite: false,
         })}

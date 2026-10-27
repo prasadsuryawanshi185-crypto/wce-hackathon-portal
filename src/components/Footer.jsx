@@ -1,13 +1,13 @@
 import { eventData } from '../data/event';
 import { Reveal } from './Reveal';
-import { ArrowUp, ExternalLink, MapPin, Mail, Phone, Globe } from 'lucide-react';
+import { ArrowUp, ExternalLink, MapPin, Mail, Phone, Globe, FileText, Sparkles } from 'lucide-react';
 
 const socialIcons = {
   youtube: (
     <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
   ),
   instagram: (
-    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+    <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z" />
   ),
   twitter: (
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -17,222 +17,147 @@ const socialIcons = {
   ),
 };
 
-const footerLinks = {
-  navigate: [
-    { label: 'Overview', href: '#hero' },
-    { label: 'About', href: '#about' },
-    { label: 'Highlights', href: '#highlights' },
-    { label: 'Domains', href: '#domains' },
-    { label: 'Timeline', href: '#timeline' },
-    { label: 'Prizes', href: '#prizes' },
-    { label: 'Sponsors', href: '#sponsors' },
-    { label: 'Journey', href: '#journey' },
-    { label: 'FAQ', href: '#faq' },
-  ],
-  resources: [
-    { label: 'Official Website', href: eventData.officialWebsite, external: true },
-    { label: 'Registration Portal', href: '#register' },
-    { label: 'Problem Statements', href: '#domains' },
-    { label: 'Past Editions', href: '#sponsors' },
-    { label: 'Contact', href: `mailto:${eventData.contactEmail}` },
-  ],
-  legal: [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Code of Conduct', href: '#' },
-  ],
-};
-
 export function Footer() {
   const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <footer className="relative border-t hairline overflow-hidden">
-      {/* Atmospheric glow */}
+    <footer className="relative border-t border-white/10 bg-[#07060f] overflow-hidden pt-16 pb-12">
+      {/* Background radial glow */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[380px] bg-[radial-gradient(ellipse_at_center,rgba(117,71,232,0.08),transparent_65%)]"
+        className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[350px] bg-[radial-gradient(ellipse_at_center,rgba(102,232,195,0.08),transparent_70%)]"
       />
-      {/* Top accent line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#7547e8]/30 to-transparent" />
 
-      <div className="container-custom relative z-10 pt-16 pb-10">
-        <Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12 mb-16">
-            {/* Brand column - wider */}
-            <div className="lg:col-span-2 relative">
-              <div className="flex items-center gap-4 mb-6 group">
-                <img src="/logos/wce-logo.svg" alt="WCE Sangli" className="h-10 object-contain group-hover:scale-105 transition-transform" />
-                <div className="w-px h-10 bg-white/10" />
-                <img
-                  src="/logos/acm-logo.png"
-                  alt="WCE ACM Student Chapter"
-                  className="h-10 object-contain group-hover:scale-105 transition-transform"
-                />
-                <div className="w-px h-10 bg-white/10" />
-                <img
-                  src="/logos/hackathon-logo.png"
-                  alt="WCE Hackathon"
-                  className="h-10 object-contain group-hover:scale-105 transition-transform"
-                />
-              </div>
-              <div className="font-display font-semibold text-2xl sm:text-3xl text-white tracking-tight leading-none mb-4">
-                {eventData.name}
-              </div>
-              <div className="font-mono text-[11px] text-[#7547e8] tracking-[0.24em] mb-6 uppercase">
-                {eventData.tagline}
-              </div>
-              <p className="text-[#929caa] text-sm leading-relaxed max-w-xs mb-8">
-                24-hour national-level hackathon under VISION symposium at Walchand College of Engineering, Sangli.
-              </p>
-              <div className="flex items-center gap-3">
-                {Object.entries(eventData.socials).map(([key, url]) => (
-                  <a
-                    key={key}
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`WCE ACM ${key}`}
-                    className="relative p-2.5 rounded-sm bg-white/[0.03] border hairline hover:border-[#7547e8]/60 hover:text-[#7547e8] hover:bg-[#7547e8]/5 transition-all duration-300 text-[#929caa] group"
-                  >
-                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                      {socialIcons[key]}
-                    </svg>
-                    <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 text-[10px] font-mono bg-[#0a0a15] border hairline rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                      {key.charAt(0).toUpperCase() + key.slice(1)}
-                    </span>
-                  </a>
-                ))}
-              </div>
+      <div className="container-custom relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14 border-b border-white/10">
+          {/* Brand Column */}
+          <div className="lg:col-span-5">
+            <div className="flex items-center gap-3 mb-5">
+              <img src="/logos/wce-logo.svg" alt="WCE Sangli" className="h-9 object-contain" />
+              <div className="w-px h-7 bg-white/20" />
+              <img src="/logos/acm-logo.png" alt="WCE ACM SC" className="h-9 object-contain" />
+              <div className="w-px h-7 bg-white/20" />
+              <img src="/logos/hackathon-logo.png" alt="WCE Hackathon" className="h-9 object-contain" />
             </div>
 
-            {/* Navigate */}
-            <div>
-              <h4 className="font-mono text-[11px] font-semibold text-white tracking-[0.22em] uppercase mb-5">
-                Navigate
-              </h4>
-              <ul className="space-y-2.5">
-                {footerLinks.navigate.map((item) => (
-                  <li key={item.href}>
-                    <a
-                      href={item.href}
-                      className="relative font-mono text-xs text-[#5c6673] hover:text-[#7547e8] transition-colors flex items-center gap-2 group"
-                    >
-                      <span className="text-[#7547e8]/40 group-hover:text-[#7547e8] transition-colors">›</span>
-                      {item.label}
-                      <span className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#7547e8]/30 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
+            <div className="font-display font-extrabold text-2xl text-white tracking-tight">
+              {eventData.name}
+            </div>
+            <div className="font-mono text-xs text-[#66E8C3] tracking-[0.2em] uppercase mt-1 mb-4">
+              {eventData.tagline}
             </div>
 
-            {/* Resources */}
-            <div>
-              <h4 className="font-mono text-[11px] font-semibold text-white tracking-[0.22em] uppercase mb-5">
-                Resources
-              </h4>
-              <ul className="space-y-2.5">
-                {footerLinks.resources.map((item) => (
-                  <li key={item.href}>
-                    <a
-                      href={item.href}
-                      target={item.external ? '_blank' : undefined}
-                      rel={item.external ? 'noopener noreferrer' : undefined}
-                      className="relative font-mono text-xs text-[#5c6673] hover:text-[#7547e8] transition-colors flex items-center gap-2 group"
-                    >
-                      <span className="text-[#7547e8]/40 group-hover:text-[#7547e8] transition-colors">›</span>
-                      {item.label}
-                      {item.external && <ExternalLink className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity" />}
-                      <span className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#7547e8]/30 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <p className="text-xs sm:text-sm text-[#8E89AA] leading-relaxed max-w-sm mb-6">
+              24-hour national-level offline hackathon under the VISION symposium, hosted at Walchand College of Engineering, Sangli.
+            </p>
 
-            {/* Contact */}
-            <div>
-              <h4 className="font-mono text-[11px] font-semibold text-white tracking-[0.22em] uppercase mb-5">
-                Contact
-              </h4>
-              <div className="space-y-4">
+            {/* Social Icons */}
+            <div className="flex items-center gap-3">
+              {Object.entries(eventData.socials).map(([key, url]) => (
                 <a
-                  href={`mailto:${eventData.contactEmail}`}
-                  className="flex items-center gap-3 p-4 panel-line rounded-sm group hover:border-[#7547e8]/30 transition-colors"
+                  key={key}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`WCE ACM ${key}`}
+                  className="p-2.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-[#66E8C3]/50 hover:text-[#66E8C3] hover:bg-[#66E8C3]/5 transition-all text-[#B9B4CA]"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-[#7547e8]/10 border border-[#7547e8]/20 flex items-center justify-center shrink-0 group-hover:border-[#7547e8]/50 transition-colors">
-                    <Mail className="w-5 h-5 text-[#7547e8]" />
-                  </div>
-                  <div>
-                    <div className="font-mono text-[10px] text-[#5c6673] uppercase tracking-[0.14em]">Email Us</div>
-                    <div className="text-sm text-[#f2f5f7] truncate max-w-[200px]">{eventData.contactEmail}</div>
-                  </div>
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    {socialIcons[key]}
+                  </svg>
                 </a>
-                <a
-                  href="tel:+918459039945"
-                  className="flex items-center gap-3 p-4 panel-line rounded-sm group hover:border-[#7547e8]/30 transition-colors"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-[#315bff]/10 border border-[#315bff]/20 flex items-center justify-center shrink-0 group-hover:border-[#315bff]/50 transition-colors">
-                    <Phone className="w-5 h-5 text-[#315bff]" />
-                  </div>
-                  <div>
-                    <div className="font-mono text-[10px] text-[#5c6673] uppercase tracking-[0.14em]">Call Us</div>
-                    <div className="text-sm text-[#f2f5f7]">+91 84590 39945</div>
-                  </div>
-                </a>
-                <div className="flex items-center gap-3 p-4 panel-line rounded-sm">
-                  <div className="w-10 h-10 rounded-lg bg-[#27dccb]/10 border border-[#27dccb]/20 flex items-center justify-center shrink-0">
-                    <MapPin className="w-5 h-5 text-[#27dccb]" />
-                  </div>
-                  <div>
-                    <div className="font-mono text-[10px] text-[#5c6673] uppercase tracking-[0.14em]">Visit Us</div>
-                    <div className="text-sm text-[#f2f5f7] max-w-[200px]">{eventData.location}</div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
-        </Reveal>
 
-        {/* Divider with pattern */}
-        <div className="relative mb-8">
-          <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-          <div className="relative flex justify-center">
-            <div className="bg-[#05060b] px-6">
-              <div className="flex items-center gap-4 text-[#5c6673] font-mono text-[10px] tracking-[0.18em] uppercase">
-                <span>© 2027 WCE ACM Student Chapter</span>
-                <span className="w-px h-4 bg-white/10" />
-                <span>Engineered with precision</span>
-                <span className="w-px h-4 bg-white/10" />
-                <span>VISION 2027 Symposium</span>
+          {/* Quick Links Column */}
+          <div className="lg:col-span-3">
+            <div className="font-mono text-xs uppercase tracking-widest text-white font-bold mb-4">
+              Navigation
+            </div>
+            <ul className="space-y-2 text-xs font-mono">
+              {eventData.navItems.map((item) => (
+                <li key={item.id}>
+                  <a
+                    href={item.href}
+                    className="text-[#8E89AA] hover:text-[#66E8C3] transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact & Leads Column */}
+          <div className="lg:col-span-4">
+            <div className="font-mono text-xs uppercase tracking-widest text-white font-bold mb-4">
+              Official Contact
+            </div>
+
+            <div className="space-y-3 text-xs text-[#B9B4CA] mb-6">
+              <div className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-[#66E8C3] shrink-0 mt-0.5" />
+                <span className="leading-relaxed">
+                  Walchand College of Engineering, A/P Vishrambag, Sangli, Maharashtra 416415
+                </span>
               </div>
+
+              <div className="flex items-center gap-2.5">
+                <Mail className="w-4 h-4 text-[#66E8C3] shrink-0" />
+                <a href={`mailto:${eventData.contactEmail}`} className="hover:text-white">
+                  {eventData.contactEmail}
+                </a>
+              </div>
+
+              <div className="flex items-center gap-2.5">
+                <Mail className="w-4 h-4 text-[#66E8C3] shrink-0" />
+                <a href="mailto:wcehackathon@walchandsangli.ac.in" className="hover:text-white">
+                  wcehackathon@walchandsangli.ac.in
+                </a>
+              </div>
+            </div>
+
+            <div className="font-mono text-[11px] text-[#8E89AA] uppercase tracking-wider mb-2">
+              Student Coordinators:
+            </div>
+            <div className="space-y-1.5 font-mono text-xs">
+              {eventData.leads.map((lead) => (
+                <div key={lead.name} className="flex items-center justify-between text-[#B9B4CA]">
+                  <span>{lead.name} ({lead.role})</span>
+                  <a href={`tel:${lead.phone.replace(/\s+/g, '')}`} className="text-[#66E8C3] hover:underline">
+                    {lead.phone}
+                  </a>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[10px] tracking-[0.18em] uppercase text-[#5c6673]">
-          <div className="flex items-center gap-4">
+        {/* Bottom Bar */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-[#8E89AA]">
+          <div>
+            © {new Date().getFullYear()} WCE ACM Student Chapter. All rights reserved.
+          </div>
+
+          <div className="flex items-center gap-6">
+            <a
+              href={eventData.unstopRegistrationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#66E8C3] hover:underline flex items-center gap-1"
+            >
+              <span>Register on Unstop</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+
             <button
               onClick={scrollTop}
-              className="flex items-center gap-2 text-[#929caa] hover:text-[#7547e8] transition-colors group"
-              aria-label="Back to top"
+              className="flex items-center gap-1.5 hover:text-white transition-colors"
             >
-              <span>Top</span>
-              <ArrowUp className="w-3.5 h-3.5 group-hover:-translate-y-0.5 transition-transform" />
+              <span>Back to Top</span>
+              <ArrowUp className="w-3.5 h-3.5" />
             </button>
-            <span className="w-px h-4 bg-white/10 hidden sm:block" />
-            <a href={eventData.officialWebsite} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-[#7547e8] transition-colors group">
-              <Globe className="w-3.5 h-3.5" />
-              wcehackathon.in
-              <ExternalLink className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-            </a>
-          </div>
-          <div className="flex items-center gap-4">
-            <span className="hidden lg:inline">Made with</span>
-            <span className="text-[#e84d4d]">♥</span>
-            <span className="hidden lg:inline">by WCE ACM SC</span>
           </div>
         </div>
       </div>

@@ -1,153 +1,173 @@
 import { eventData } from '../data/event';
 import { SectionHeading } from '../components/SectionTag';
 import { Reveal } from '../components/Reveal';
-import { Trophy, Briefcase, Palette, Share2, Award } from 'lucide-react';
+import { Trophy, Award, Sparkles, CheckCircle2, ShieldCheck, Palette, Share2, Briefcase } from 'lucide-react';
 
 const icons = {
-  podium: Trophy,
-  internships: Briefcase,
-  uiux: Palette,
-  social: Share2,
-  certificates: Award,
+  winner: Trophy,
+  runner1: Award,
+  runner2: Award,
+  'novice-award': Sparkles,
+  'uiux-award': Palette,
+  'social-award': Share2,
 };
 
-const prizeAccents = ['#27dccb', '#315bff', '#7547e8', '#27dccb'];
-
 export function Prizes() {
-  const [featured, ...rest] = eventData.prizes;
+  const podiumPrizes = eventData.prizes.slice(0, 3);
+  const specialtyPrizes = eventData.prizes.slice(3);
 
   return (
-    <section id="prizes" aria-label="Prizes" className="relative section-pad overflow-hidden">
+    <section id="prizes" aria-label="Prizes and Rewards" className="relative section-pad overflow-hidden">
+      {/* Background glow effects */}
       <div
         aria-hidden="true"
-        className="absolute left-1/2 top-24 h-[520px] w-[820px] max-w-[140vw] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(117,71,232,0.20),rgba(49,91,255,0.08)_45%,transparent_72%)] blur-2xl"
+        className="pointer-events-none absolute left-1/2 top-10 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(116,69,166,0.18),rgba(102,232,195,0.08)_50%,transparent_75%)] blur-3xl"
       />
 
       <div className="container-custom relative z-10">
         <SectionHeading
           index="SEC // 05"
-          kicker="Honors"
-          title="Engineered"
-          accent="glory."
-          description="Trophies, career acceleration, national citations."
+          kicker="Bounties & Honors"
+          title="PRIZES &"
+          accent="REWARDS."
+          description="Total cash prize pool and honors exceeding ₹1,00,000+ awaiting the sharpest developers."
         />
 
-        {/* Flagship award - unique layout */}
-        <Reveal>
-          <div className="relative mb-10 overflow-hidden rounded-sm border border-white/10 bg-gradient-to-b from-[#12152a]/90 via-[#0c0f1b]/85 to-[#080a12]/90">
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 opacity-60 [background-image:linear-gradient(rgba(117,71,232,0.10)_1px,transparent_1px),linear-gradient(90deg,rgba(49,91,255,0.10)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_78%)]"
-            />
-            <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 items-center p-8 sm:p-12 lg:p-16">
-              <div className="lg:col-span-7 relative z-10">
-                <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#27dccb]">
-                  {featured.category}
-                </span>
-                <h3 className="mt-5 font-display text-3xl font-semibold leading-[1.05] text-[#f5f6fa] sm:text-4xl lg:text-5xl">
-                  {featured.title}
-                </h3>
-                <p className="mt-4 max-w-xl text-base leading-relaxed text-[#a5aabd]">
-                  {featured.description}
-                </p>
-                <div className="mt-8 flex flex-wrap gap-2.5">
-                  {featured.perks.slice(0, 3).map((perk) => (
-                    <span
-                      key={perk}
-                      className="rounded-sm border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-[#c7cfd9]"
-                    >
-                      {perk}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Geometric trophy composition */}
-              <div className="lg:col-span-5 flex justify-center relative z-10">
-                <div className="relative flex h-64 w-64 items-center justify-center">
-                  <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(39,220,203,0.18),transparent_66%)]" />
-                  <div className="absolute inset-6 rotate-45 rounded-[18%] border border-[#7547e8]/40" />
-                  <div className="absolute inset-10 -rotate-12 rounded-[14%] border border-[#315bff]/50" />
-                  <div className="absolute inset-14 rotate-6 rounded-full border border-[#27dccb]/50" />
-                  <div className="absolute inset-0 animate-[spin-slow_42s_linear_infinite] rounded-full border border-dashed border-white/10" />
-                  <div className="relative flex h-24 w-24 items-center justify-center rounded-2xl border border-[#27dccb]/40 bg-[#0a0e1a] shadow-[0_0_60px_-10px_rgba(39,220,203,0.6)]">
-                    <Trophy className="h-11 w-11 text-[#27dccb]" strokeWidth={1.4} />
-                  </div>
-                </div>
-              </div>
+        {/* Total Prize Pool Hero Banner */}
+        <Reveal delay={0.1}>
+          <div className="relative my-10 sm:my-14 overflow-hidden rounded-2xl border border-white/15 bg-gradient-to-b from-[#14102c]/90 via-[#0e0c20]/80 to-[#090714]/90 p-8 sm:p-12 text-center backdrop-blur-2xl shadow-[0_0_50px_rgba(116,69,166,0.2)]">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#66E8C3]/10 border border-[#66E8C3]/30 font-mono text-xs tracking-[0.2em] text-[#66E8C3] uppercase mb-4 font-semibold">
+              <Sparkles className="w-3.5 h-3.5" />
+              TOTAL PRIZE POOL
             </div>
+
+            <h3 className="font-display font-extrabold text-5xl sm:text-7xl lg:text-8xl tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400">
+              {eventData.totalPrizePool}
+            </h3>
+
+            <p className="mt-4 font-mono text-xs sm:text-sm text-[#B9B4CA] max-w-xl mx-auto uppercase tracking-wider">
+              Cash bounties, champion trophies, summer internships, and cloud credits
+            </p>
           </div>
         </Reveal>
 
-        {/* Supporting awards - unique asymmetric cards */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {rest.map((prize, i) => {
-            const Icon = icons[prize.id] || Award;
-            const accent = prizeAccents[i % prizeAccents.length];
+        {/* Podium Top 3 Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          {podiumPrizes.map((prize, idx) => {
+            const isWinner = prize.rank === '1st';
             return (
-              <Reveal key={prize.id} delay={0.06 + i * 0.06} y={22}>
-                <article
-                  className={`group relative flex flex-col h-full overflow-hidden rounded-sm border border-white/10 bg-white/[0.02] transition-colors duration-500 hover:border-white/20 ${
-                    i === 0 ? 'md:row-span-2 lg:col-span-2' : ''
+              <Reveal key={prize.id} delay={0.15 + idx * 0.1} y={24}>
+                <div
+                  className={`relative flex flex-col justify-between rounded-2xl border p-7 sm:p-8 backdrop-blur-xl h-full transition-all duration-400 hover:-translate-y-1.5 ${
+                    isWinner
+                      ? 'border-amber-400/50 bg-[#171333]/90 shadow-[0_0_40px_rgba(251,191,36,0.18)] ring-1 ring-amber-400/30'
+                      : 'border-white/10 bg-[#0e0c1f]/80 hover:border-white/20'
                   }`}
                 >
-                  <div
-                    aria-hidden="true"
-                    className="absolute -right-8 -top-8 h-24 w-24 rounded-full opacity-0 blur-2xl transition-opacity duration-700 group-hover:opacity-100"
-                    style={{ background: accent }}
-                  />
-                  
-                  {i === 0 ? (
-                    // Featured wide card
-                    <div className="relative z-10 p-7 h-full flex flex-col">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-sm border border-white/10 mb-4" style={{ background: `${accent}14` }}>
-                        <Icon className="h-6 w-6" style={{ color: accent }} strokeWidth={1.7} />
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-display text-xl font-semibold leading-snug text-[#f5f6fa] mb-2">
-                          {prize.title}
-                        </h4>
-                        <p className="text-sm leading-relaxed text-[#a5aabd]">
-                          {prize.description}
-                        </p>
-                      </div>
-                      <div className="mt-4 pt-4 border-t hairline flex flex-wrap gap-2">
-                        {prize.perks.slice(0, 3).map((perk) => (
-                          <span key={perk} className="rounded-sm border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[11px] text-[#c7cfd9]">
-                            {perk}
-                          </span>
-                        ))}
-                      </div>
-                      <span className="mt-4 font-mono text-[10px] uppercase tracking-[0.18em] text-[#6b7488] block">
-                        {prize.category}
+                  <div>
+                    {/* Header: Rank Badge & Trophy */}
+                    <div className="flex items-center justify-between mb-6">
+                      <span
+                        className={`font-mono text-xs font-bold tracking-widest px-3 py-1 rounded-full border ${
+                          isWinner
+                            ? 'border-amber-400/40 bg-amber-400/10 text-amber-300'
+                            : 'border-white/15 bg-white/[0.04] text-[#B9B4CA]'
+                        }`}
+                      >
+                        {prize.badge}
                       </span>
+                      <Trophy
+                        className={`w-7 h-7 ${
+                          isWinner ? 'text-amber-400' : 'text-[#66E8C3]'
+                        }`}
+                      />
                     </div>
-                  ) : (
-                    // Standard cards
-                    <div className="relative z-10 p-6 h-full flex flex-col">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-sm border border-white/10 mb-4" style={{ background: `${accent}14` }}>
-                        <Icon className="h-5 w-5" style={{ color: accent }} strokeWidth={1.7} />
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-display text-lg font-semibold leading-snug text-[#f5f6fa] mb-2">
-                          {prize.title}
-                        </h4>
-                        <p className="text-sm leading-relaxed text-[#a5aabd]">
-                          {prize.description}
-                        </p>
-                      </div>
-                      <span className="mt-4 font-mono text-[10px] uppercase tracking-[0.18em] text-[#6b7488] block">
-                        {prize.category}
-                      </span>
+
+                    {/* Prize Amount */}
+                    <div
+                      className={`font-display font-black text-4xl sm:text-5xl leading-none mb-2 ${
+                        isWinner
+                          ? 'text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-yellow-400'
+                          : 'text-white'
+                      }`}
+                    >
+                      {prize.amount}
                     </div>
-                  )}
-                  
-                  <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-current/30 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" style={{ opacity: 0.5 }} />
-                </article>
+
+                    {/* Title & Category */}
+                    <h4 className="font-display font-bold text-xl text-white mt-3 mb-1">
+                      {prize.title}
+                    </h4>
+
+                    <p className="font-mono text-[11px] text-[#66E8C3] tracking-wider uppercase mb-5">
+                      {prize.category}
+                    </p>
+
+                    <p className="text-xs sm:text-sm text-[#B9B4CA] leading-relaxed mb-6">
+                      {prize.description}
+                    </p>
+
+                    {/* Perks */}
+                    <ul className="space-y-2.5 pt-4 border-t border-white/10">
+                      {prize.perks.map((perk, i) => (
+                        <li key={i} className="flex items-start gap-2.5 text-xs text-[#c7cfd9]">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#66E8C3] shrink-0 mt-0.5" />
+                          <span className="leading-relaxed">{perk}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </Reveal>
             );
           })}
         </div>
+
+        {/* Specialty Awards Grid */}
+        <Reveal delay={0.25}>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-8 sm:p-10 backdrop-blur-xl">
+            <h4 className="font-display font-bold text-2xl text-white mb-2">
+              Special Track & Category Awards
+            </h4>
+            <p className="font-mono text-xs text-[#8E89AA] tracking-wider uppercase mb-8">
+              Targeted bounties for design, rookie excellence, and community storytelling
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {specialtyPrizes.map((prize) => {
+                const Icon = icons[prize.id] || Sparkles;
+                return (
+                  <div
+                    key={prize.id}
+                    className="rounded-xl border border-white/10 bg-[#0e0c1f]/60 p-6 hover:border-[#66E8C3]/40 transition-colors"
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="p-2.5 rounded-lg bg-[#66E8C3]/10 border border-[#66E8C3]/30 text-[#66E8C3]">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <div className="font-mono text-[10px] text-[#8E89AA] uppercase tracking-wider">
+                          {prize.badge}
+                        </div>
+                        <h5 className="font-display font-bold text-lg text-white">
+                          {prize.title}
+                        </h5>
+                      </div>
+                    </div>
+
+                    <p className="text-xs text-[#B9B4CA] leading-relaxed mb-4">
+                      {prize.description}
+                    </p>
+
+                    <div className="font-mono text-xs text-[#66E8C3] font-semibold">
+                      {prize.amount}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

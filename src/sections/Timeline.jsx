@@ -1,170 +1,121 @@
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { eventData } from '../data/event';
 import { SectionHeading } from '../components/SectionTag';
 import { Reveal } from '../components/Reveal';
-import { Calendar, Zap, Code, Users, Award } from 'lucide-react';
-
-const phaseIcons = {
-  '01': Calendar,
-  '02': Users,
-  '03': Zap,
-  '04': Code,
-  '05': Award,
-};
-
-function PhaseIcon({ step }) {
-  const Icon = phaseIcons[step];
-  return <Icon className="w-7 h-7 text-[#7547e8]" strokeWidth={1.5} />;
-}
-
-function PhaseIconSmall({ step }) {
-  const Icon = phaseIcons[step];
-  return <Icon className="w-5 h-5 text-[#7547e8]" strokeWidth={1.5} />;
-}
+import { Calendar, Clock, CheckCircle2, ArrowUpRight, Flame, ShieldAlert } from 'lucide-react';
 
 export function Timeline() {
-  const phases = eventData.timeline;
+  const [activeStep, setActiveStep] = useState(null);
 
   return (
-    <section id="timeline" aria-label="Event timeline" className="relative section-pad overflow-hidden">
+    <section
+      id="timeline"
+      aria-label="Event timeline"
+      className="relative section-pad overflow-hidden"
+    >
+      {/* Background radial glows */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(49,91,255,0.05),transparent_60%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(116,69,166,0.1),transparent_65%)]"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(39,220,203,0.04),transparent_60%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(102,232,195,0.08),transparent_65%)]"
       />
+
       <div className="container-custom relative z-10">
         <SectionHeading
           index="SEC // 04"
-          kicker="Chronology"
-          title="Five phases."
-          accent="One conquest."
-          description="From abstract submission to the grand jury demo."
+          kicker="Roadmap & Milestones"
+          title="EVENT"
+          accent="TIMELINE."
+          description="Six key milestones guiding teams from registration to grand final demos."
+          align="center"
         />
 
-        {/* Desktop: Horizontal timeline with connecting line */}
-        <div className="relative hidden lg:block mt-4">
-          <div
-            aria-hidden="true"
-            className="absolute left-0 right-0 top-[40px] h-px bg-gradient-to-r from-transparent via-[#7547e8]/50 to-transparent"
-          />
-          
-          <div className="grid grid-cols-5 gap-4">
-            {phases.map((phase, i) => (
-              <Reveal key={phase.step} delay={i * 0.08} y={20}>
-                <article className="group relative">
-                  {/* Timeline marker */}
-                  <div className="relative flex justify-center mb-6">
-                    <div className="relative z-10 flex items-center justify-center w-[80px] h-[80px] rounded-full border-2 border-white/10 bg-[#0b0e18] transition-all duration-500 group-hover:border-[#7547e8]/70 group-hover:scale-110">
-                      <span className="font-display text-xl font-semibold text-[#f5f6fa]">
-                        {phase.step}
-                      </span>
-                      <div className="absolute inset-0 rounded-full border border-transparent transition-all duration-500 group-hover:border-[#7547e8]/30 group-hover:scale-125" />
+        {/* Milestone Cards in 2 columns or structured progression */}
+        <div className="mt-14 max-w-5xl mx-auto">
+          <div className="relative">
+            {/* Center line for larger screens */}
+            <div className="hidden md:block absolute left-1/2 top-4 bottom-4 w-px -translate-x-1/2 bg-gradient-to-b from-[#66E8C3] via-[#7445A6] to-[#66E8C3]/20" />
+
+            <div className="space-y-8 md:space-y-12">
+              {eventData.timeline.map((item, idx) => {
+                const isEven = idx % 2 === 0;
+                return (
+                  <Reveal key={item.id} delay={idx * 0.08} y={20}>
+                    <div
+                      className={`relative flex flex-col md:flex-row items-center gap-6 md:gap-12 ${
+                        isEven ? 'md:flex-row-reverse text-left md:text-right' : 'text-left'
+                      }`}
+                      onMouseEnter={() => setActiveStep(item.id)}
+                      onMouseLeave={() => setActiveStep(null)}
+                    >
+                      {/* Content Card */}
+                      <div className="w-full md:w-1/2">
+                        <div className="relative rounded-2xl border border-white/10 bg-[#0e0c1f]/85 p-6 sm:p-7 backdrop-blur-xl transition-all duration-300 hover:border-[#66E8C3]/50 hover:shadow-[0_0_30px_rgba(102,232,195,0.1)] group">
+                          {/* Badge & Date */}
+                          <div
+                            className={`flex items-center gap-2 mb-3 ${
+                              isEven ? 'justify-start md:justify-end' : 'justify-start'
+                            }`}
+                          >
+                            <span className="font-mono text-[10px] tracking-[0.2em] uppercase px-2.5 py-0.5 rounded-full bg-[#66E8C3]/10 border border-[#66E8C3]/30 text-[#66E8C3] font-semibold">
+                              {item.badge}
+                            </span>
+                            <span className="font-mono text-xs text-[#8E89AA] flex items-center gap-1">
+                              <Clock className="w-3.5 h-3.5 text-[#66E8C3]" />
+                              {item.date}
+                            </span>
+                          </div>
+
+                          {/* Title */}
+                          <h3 className="font-display font-bold text-xl sm:text-2xl text-white group-hover:text-[#66E8C3] transition-colors mb-3">
+                            {item.title}
+                          </h3>
+
+                          {/* Description */}
+                          <p className="text-xs sm:text-sm text-[#B9B4CA] leading-relaxed">
+                            {item.description}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Center Node Indicator */}
+                      <div className="hidden md:flex relative z-10 w-12 h-12 rounded-full border-2 border-[#66E8C3] bg-[#0d0b1c] items-center justify-center shadow-[0_0_20px_rgba(102,232,195,0.4)] shrink-0">
+                        <span className="font-mono text-xs font-bold text-white">
+                          0{item.id}
+                        </span>
+                      </div>
+
+                      {/* Empty spacer for alternating balance */}
+                      <div className="hidden md:block w-1/2" />
                     </div>
-                  </div>
-
-                  {/* Phase label */}
-                  <div className="text-center mb-4">
-                    <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-[#7547e8]">
-                      {phase.phase?.split('//')[1]?.trim() ?? phase.phase}
-                    </span>
-                  </div>
-
-                  {/* Icon */}
-                  <div className="flex justify-center mb-4">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#7547e8]/10 to-[#315bff]/10 border border-white/5 flex items-center justify-center group-hover:border-[#7547e8]/30 transition-all duration-500">
-                      <PhaseIcon step={phase.step} />
-                    </div>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="font-display text-lg xl:text-xl font-semibold leading-snug text-[#f5f6fa] text-center group-hover:text-[#7547e8] transition-colors duration-500 mb-3">
-                    {phase.title}
-                  </h3>
-                  
-                  {/* Timeframe */}
-                  <div className="text-center mb-4">
-                    <span className="inline-flex w-fit rounded-sm border border-white/10 bg-white/[0.03] px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-[#a5aabd]">
-                      {phase.timeframe}
-                    </span>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-sm leading-relaxed text-[#a5aabd] text-center mb-4 px-2">
-                    {phase.description}
-                  </p>
-
-                  {/* Highlights - minimal */}
-                  <ul className="space-y-2 px-2">
-                    {phase.highlights.slice(0, 2).map((h) => (
-                      <li key={h} className="flex items-center justify-center gap-2 text-[12px] leading-snug text-[#8b93a7]">
-                        <span className="w-1.5 h-1.5 shrink-0 rounded-full bg-[#315bff]" />
-                        <span className="truncate max-w-[200px]">{h}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              </Reveal>
-            ))}
+                  </Reveal>
+                );
+              })}
+            </div>
           </div>
         </div>
 
-        {/* Mobile: Vertical timeline */}
-        <div className="relative lg:hidden mt-2">
-          <div
-            aria-hidden="true"
-            className="absolute left-[11px] top-2 bottom-4 w-px bg-gradient-to-b from-transparent via-[#7547e8]/50 to-transparent"
-          />
-          <div className="space-y-10">
-            {phases.map((phase, i) => (
-              <Reveal key={phase.step} delay={i * 0.05} x={-18} y={0}>
-                <article className="group relative pl-10">
-                  {/* Timeline marker */}
-                  <div className="absolute left-0 top-2 flex items-center justify-center w-[24px] h-[24px]">
-                    <div className="relative z-10 flex items-center justify-center w-[24px] h-[24px] rounded-full border-2 border-white/10 bg-[#0b0e18] transition-all duration-500 group-hover:border-[#7547e8]/70 group-hover:scale-110">
-                      <span className="font-display text-[11px] font-semibold text-[#f5f6fa]">
-                        {phase.step}
-                      </span>
-                      <div className="absolute inset-0 rounded-full border border-transparent transition-all duration-500 group-hover:border-[#7547e8]/30 group-hover:scale-125" />
-                    </div>
-                  </div>
-
-                  <div className="ml-4">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#7547e8]/10 to-[#315bff]/10 border border-white/5 flex items-center justify-center group-hover:border-[#7547e8]/30 transition-all duration-500 shrink-0">
-                        <PhaseIconSmall step={phase.step} />
-                      </div>
-                      <div>
-                        <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-[#7547e8] block">
-                          {phase.phase?.split('//')[1]?.trim() ?? phase.phase}
-                        </span>
-                        <h3 className="font-display text-xl font-semibold leading-snug text-[#f5f6fa] mt-0.5">
-                          {phase.title}
-                        </h3>
-                      </div>
-                    </div>
-                    
-                    <p className="text-sm leading-relaxed text-[#a5aabd] mb-3 max-w-xl">
-                      {phase.description}
-                    </p>
-                    
-                    <span className="inline-flex rounded-sm border border-white/10 bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-[#a5aabd] mb-3">
-                      {phase.timeframe}
-                    </span>
-                    
-                    <ul className="space-y-1.5 pl-2 border-l border-white/10 ml-1">
-                      {phase.highlights.slice(0, 3).map((h) => (
-                        <li key={h} className="flex items-center gap-2 text-[12px] leading-snug text-[#8b93a7]">
-                          <span className="w-1.5 h-1.5 shrink-0 rounded-full bg-[#315bff]" />
-                          <span>{h}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
+        {/* Fee & Logistics Callout */}
+        <div className="mt-16 max-w-3xl mx-auto rounded-xl border border-white/10 bg-white/[0.02] p-6 text-center backdrop-blur-md">
+          <div className="flex flex-wrap items-center justify-center gap-6 font-mono text-xs text-[#B9B4CA]">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-[#66E8C3]" />
+              <span>ROUND 1: 100% FREE ENTRY</span>
+            </div>
+            <div className="h-4 w-px bg-white/20 hidden sm:block" />
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-[#66E8C3]" />
+              <span>ROUND 2: ₹400 PER SHORTLISTED TEAM</span>
+            </div>
+            <div className="h-4 w-px bg-white/20 hidden sm:block" />
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-[#66E8C3]" />
+              <span>MEALS & STAY INCLUDED</span>
+            </div>
           </div>
         </div>
       </div>

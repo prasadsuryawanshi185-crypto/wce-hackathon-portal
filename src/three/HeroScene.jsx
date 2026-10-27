@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { HeroArtifact } from './HeroArtifact';
+import { Environment } from '@react-three/drei';
+import { HeroChainScene } from './HeroChainScene';
 import { HeroFallback } from './HeroFallback';
 
 function detectWebGL() {
@@ -122,28 +123,23 @@ export function HeroScene() {
         shared.current.hover = true;
       }}
       role="img"
-      aria-label="Interactive geometric sculpture representing the WCE Hackathon 2027 identity"
+      aria-label="Photorealistic interlocking polished metal chain representing the WCE Hackathon 2027 identity"
     >
       <Canvas
-        dpr={[1, 1.75]}
-        camera={{ position: [0, 0.15, 8.6], fov: 38, near: 0.1, far: 60 }}
+        dpr={[1, 1.9]}
+        camera={{ position: [0.6, 0.4, 9.2], fov: 34, near: 0.1, far: 65 }}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         frameloop={active ? 'always' : 'never'}
         style={{ background: 'transparent' }}
       >
-        <ambientLight intensity={0.4} color="#16233d" />
-        <directionalLight position={[7, 9, 6]} intensity={2.4} color="#00e5d4" />
-        <directionalLight position={[-8, -4, 5]} intensity={1.1} color="#929caa" />
-        <directionalLight position={[0, -8, -3]} intensity={0.45} color="#b9f36b" />
-        <spotLight
-          position={[0, 10, 3]}
-          angle={0.5}
-          penumbra={1}
-          intensity={0.9}
-          color="#e6fbf6"
-        />
+        <ambientLight intensity={0.6} color="#221a3a" />
+        <directionalLight position={[10, 12, 9]} intensity={3.0} color="#F7F5FF" />
+        <directionalLight position={[6, 4, 10]} intensity={2.2} color="#66E8C3" />
+        <directionalLight position={[-10, -6, 8]} intensity={1.6} color="#7445A6" />
+        <spotLight position={[0, 14, 6]} angle={0.42} penumbra={1.4} intensity={1.2} color="#F7F5FF" />
+        <Environment preset="studio" />
         <CameraRig shared={shared} />
-        <HeroArtifact shared={shared} reducedMotion={reducedMotion} />
+        <HeroChainScene shared={shared} reducedMotion={reducedMotion} />
       </Canvas>
     </div>
   );

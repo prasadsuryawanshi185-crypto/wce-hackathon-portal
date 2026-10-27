@@ -2,10 +2,9 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { eventData } from '../data/event';
 import { Reveal } from '../components/Reveal';
-import { EASE_OUT_EXPO } from '../lib/easing';
-import { ArrowUpRight, CheckCircle2, Send, Mail, Lock, User, Building2 } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2, Send, Mail, User, Building2, Sparkles, FileText, Phone } from 'lucide-react';
 
-const initialForm = { name: '', email: '', college: '', track: 'novice' };
+const initialForm = { name: '', email: '', college: '', track: 'novice', phone: '' };
 
 export function FinalCTA() {
   const [form, setForm] = useState(initialForm);
@@ -17,7 +16,7 @@ export function FinalCTA() {
     if (!form.name.trim()) errs.name = 'Full name is required';
     if (!form.email.trim()) errs.email = 'Email is required';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errs.email = 'Enter a valid email address';
-    if (!form.college.trim()) errs.college = 'Institution is required';
+    if (!form.college.trim()) errs.college = 'College/Institution name is required';
     return errs;
   };
 
@@ -36,211 +35,214 @@ export function FinalCTA() {
     setSubmitted(true);
     try {
       localStorage.setItem(
-        'wce_hackathon_2027_interest',
+        'wce_hackathon_interest',
         JSON.stringify({ ...form, timestamp: new Date().toISOString() })
       );
     } catch {
-      // storage unavailable — registration is session-only
+      // ignore local storage restrictions
     }
   };
-
-  const inputClass = (field) =>
-    `w-full pl-12 pr-4 py-3.5 rounded-sm bg-[#0b1017] border text-white text-sm font-sans outline-none focus:ring-2 focus:ring-[#7547e8]/70 transition-all duration-300 ${
-      errors[field] ? 'border-rose-500' : 'hairline hover:border-white/20'
-    }`;
 
   return (
     <section
       id="register"
-      aria-label="Register interest"
-      className="relative py-28 sm:py-40 overflow-hidden"
+      aria-label="Register and priority access"
+      className="relative py-28 sm:py-36 overflow-hidden"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_100%,rgba(117,71,232,0.12),transparent_55%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_100%,rgba(116,69,166,0.18),transparent_60%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-20 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-[radial-gradient(circle,rgba(102,232,195,0.12),transparent_70%)] blur-3xl"
       />
 
-      <div className="container-custom relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <Reveal className="text-center">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <span className="font-mono text-[11px] text-[#7547e8] tracking-[0.2em]">SEC // 09</span>
-            </div>
-            <h2 className="font-display font-extrabold uppercase tracking-[-0.02em] leading-[1.02] text-4xl sm:text-5xl lg:text-6xl">
-              Your next idea could
-              <br />
-              <span className="text-gradient-violet">change everything.</span>
-            </h2>
-            <p className="mt-6 text-[#929caa] text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-              Priority access to 2027 problem dossiers.
-            </p>
-          </Reveal>
+      <div className="container-custom relative z-10 max-w-4xl mx-auto">
+        <Reveal className="text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#66E8C3]/10 border border-[#66E8C3]/30 text-[#66E8C3] font-mono text-xs tracking-widest uppercase mb-6 font-semibold">
+            <Sparkles className="w-3.5 h-3.5" />
+            OFFICIAL REGISTRATION ARENA
+          </div>
 
-          <Reveal delay={0.12}>
-            <div className="relative mt-12 tech-corners glass-panel rounded-sm p-8 sm:p-12 overflow-hidden">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-[#7547e8]/60 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-br from-[#7547e8]/3 via-transparent to-transparent" />
+          <h2 className="font-display font-black uppercase tracking-tight text-4xl sm:text-5xl lg:text-6xl text-white">
+            Your code can
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#66E8C3] via-[#55DCCB] to-[#7445A6]">
+              define the future.
+            </span>
+          </h2>
 
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-7 mb-8 border-b hairline relative z-10">
-                <div>
-                  <span className="font-mono text-[10px] text-[#7547e8] tracking-[0.22em] uppercase block mb-1.5">
-                    Edition // 2027 Notification Registry
-                  </span>
-                  <h3 className="font-display font-extrabold text-xl sm:text-2xl text-white uppercase">
-                    Priority Access
-                  </h3>
-                </div>
-                <span className="flex items-center gap-2 px-3 py-1.5 rounded-sm bg-white/[0.03] border hairline font-mono text-[10px] tracking-[0.18em] text-[#929caa] uppercase shrink-0">
-                  <span className="w-2 h-2 rounded-full bg-[#b9f36b] pulse-dot" />
-                  Pre-registration open
+          <p className="mt-5 text-[#B9B4CA] text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
+            Register directly on Unstop for Round 1 free submission or register your team for priority mentor alerts.
+          </p>
+
+          {/* Big Unstop Primary CTA */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <a
+              href={eventData.unstopRegistrationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary !py-4 !px-8 text-base font-bold shadow-[0_0_35px_rgba(102,232,195,0.4)] hover:shadow-[0_0_45px_rgba(102,232,195,0.6)]"
+            >
+              <Sparkles className="w-5 h-5" />
+              <span>OFFICIAL REGISTRATION ON UNSTOP</span>
+              <ArrowUpRight className="w-5 h-5" />
+            </a>
+
+            <a
+              href={eventData.problemStatementsDriveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-secondary !py-4 !px-6 text-sm font-semibold"
+            >
+              <FileText className="w-4 h-4 text-[#66E8C3]" />
+              <span>PROBLEM STATEMENTS PDF</span>
+            </a>
+          </div>
+        </Reveal>
+
+        {/* Priority Updates / Pre-Registration Box */}
+        <Reveal delay={0.15}>
+          <div className="mt-14 rounded-2xl border border-white/10 bg-[#0e0c1f]/85 p-8 sm:p-12 backdrop-blur-xl shadow-2xl relative overflow-hidden">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-8 border-b border-white/10">
+              <div>
+                <span className="font-mono text-xs text-[#66E8C3] tracking-[0.2em] uppercase font-bold block mb-1">
+                  // INSTANT PRIORITY ALERTS
                 </span>
+                <h3 className="font-display font-bold text-xl sm:text-2xl text-white">
+                  Get Problem Statement Updates & Mentor Briefs
+                </h3>
               </div>
 
-              <AnimatePresence mode="wait">
-                {submitted ? (
-                  <motion.div
-                    key="done"
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
-                    className="relative z-10 text-center py-10"
-                  >
-                    <div className="w-14 h-14 rounded-full bg-[rgba(117,71,232,0.1)] border border-[#7547e8]/40 flex items-center justify-center mx-auto mb-6">
-                      <CheckCircle2 className="w-7 h-7 text-[#7547e8]" />
-                    </div>
-                    <h4 className="font-display font-extrabold text-3xl text-white uppercase">
-                      Interest logged
-                    </h4>
-                    <p className="mt-4 text-[#929caa] max-w-md mx-auto leading-relaxed">
-                      {form.name.split(' ')[0]} — your priority alert for the{' '}
-                      <span className="text-[#7547e8] font-mono text-sm">{form.track.toUpperCase()}</span> track
-                      is recorded in this browser session.
-                    </p>
-                    <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-                      <a href={eventData.officialWebsite} target="_blank" rel="noopener noreferrer" className="btn-secondary">
-                        Official Portal
-                        <ArrowUpRight className="w-4 h-4" />
-                      </a>
-                      <button
-                        onClick={() => {
-                          setSubmitted(false);
-                          setForm(initialForm);
-                        }}
-                        className="font-mono text-xs text-[#929caa] hover:text-white transition-colors uppercase tracking-[0.16em]"
-                      >
-                        Submit another
-                      </button>
-                    </div>
-                  </motion.div>
-                ) : (
-                  <motion.form
-                    key="form"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0, y: -14 }}
-                    transition={{ duration: 0.5 }}
-                    onSubmit={handleSubmit}
-                    noValidate
-                    className="relative z-10 space-y-6"
-                  >
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <div>
-                        <label htmlFor="reg-name" className="block font-mono text-[11px] tracking-[0.18em] uppercase text-[#c7cfd9] mb-2">
-                          Team Lead Name <span className="text-[#7547e8]">*</span>
-                        </label>
-                        <div className="relative">
-                          <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#5c6673] pointer-events-none" />
-                          <input
-                            id="reg-name"
-                            type="text"
-                            value={form.name}
-                            onChange={update('name')}
-                            placeholder="e.g. Aniket Bodkhe"
-                            className={inputClass('name')}
-                            aria-invalid={Boolean(errors.name)}
-                          />
-                        </div>
-                        {errors.name && <span className="text-xs text-rose-400 mt-1.5 block font-mono ml-2">{errors.name}</span>}
-                      </div>
-                      <div>
-                        <label htmlFor="reg-email" className="block font-mono text-[11px] tracking-[0.18em] uppercase text-[#c7cfd9] mb-2">
-                          Official Email <span className="text-[#7547e8]">*</span>
-                        </label>
-                        <div className="relative">
-                          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#5c6673] pointer-events-none" />
-                          <input
-                            id="reg-email"
-                            type="email"
-                            value={form.email}
-                            onChange={update('email')}
-                            placeholder="developer@college.edu"
-                            className={inputClass('email')}
-                            aria-invalid={Boolean(errors.email)}
-                          />
-                        </div>
-                        {errors.email && <span className="text-xs text-rose-400 mt-1.5 block font-mono ml-2">{errors.email}</span>}
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <div>
-                        <label htmlFor="reg-college" className="block font-mono text-[11px] tracking-[0.18em] uppercase text-[#c7cfd9] mb-2">
-                          Institution <span className="text-[#7547e8]">*</span>
-                        </label>
-                        <div className="relative">
-                          <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#5c6673] pointer-events-none" />
-                          <input
-                            id="reg-college"
-                            type="text"
-                            value={form.college}
-                            onChange={update('college')}
-                            placeholder="College of Engineering"
-                            className={inputClass('college')}
-                            aria-invalid={Boolean(errors.college)}
-                          />
-                        </div>
-                        {errors.college && <span className="text-xs text-rose-400 mt-1.5 block font-mono ml-2">{errors.college}</span>}
-                      </div>
-                      <div>
-                        <label htmlFor="reg-track" className="block font-mono text-[11px] tracking-[0.18em] uppercase text-[#c7cfd9] mb-2">
-                          Target Track
-                        </label>
-                        <div className="relative">
-                          <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#5c6673] pointer-events-none" />
-                          <select
-                            id="reg-track"
-                            value={form.track}
-                            onChange={update('track')}
-                            className="w-full pl-12 pr-4 py-3.5 rounded-sm bg-[#0b1017] hairline text-white text-sm outline-none focus:ring-2 focus:ring-[#7547e8]/70 transition-all appearance-none"
-                          >
-                            <option value="novice">Novice — 1st & 2nd Year</option>
-                            <option value="expert">Expert — Advanced Systems</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-3 text-xs text-[#5c6673] font-mono leading-relaxed panel-line rounded-sm p-4">
-                      <span className="text-[#7547e8] mt-0.5">i</span>
-                      This logs your interest for 2027 priority updates. Final Round 1 registration happens on the official symposium portal upon release.
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-                      <button type="submit" className="btn-primary">
-                        Record Pre-Registration
-                        <Send className="w-4 h-4" />
-                      </button>
-                      <span className="font-mono text-[10px] tracking-[0.2em] text-[#5c6673] uppercase">
-                        Round 1 entry — 100% free
-                      </span>
-                    </div>
-                  </motion.form>
-                )}
-              </AnimatePresence>
+              <span className="self-start sm:self-auto font-mono text-xs px-3 py-1 rounded-full bg-[#66E8C3]/10 border border-[#66E8C3]/30 text-[#66E8C3]">
+                Free Updates
+              </span>
             </div>
-          </Reveal>
-        </div>
+
+            <AnimatePresence mode="wait">
+              {submitted ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="py-10 text-center"
+                >
+                  <div className="w-16 h-16 rounded-full bg-[#66E8C3]/15 border border-[#66E8C3]/40 flex items-center justify-center text-[#66E8C3] mx-auto mb-5">
+                    <CheckCircle2 className="w-8 h-8" />
+                  </div>
+                  <h4 className="font-display font-bold text-2xl text-white mb-2">
+                    You're On The Priority List!
+                  </h4>
+                  <p className="text-sm text-[#B9B4CA] max-w-md mx-auto mb-6">
+                    We've registered your interest. Make sure to complete your official team profile on Unstop.
+                  </p>
+                  <a
+                    href={eventData.unstopRegistrationUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary !py-2.5 !px-5 text-xs font-semibold inline-flex items-center gap-2"
+                  >
+                    <span>Proceed To Unstop Registration</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </a>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="font-mono text-xs text-[#8E89AA] uppercase block mb-1.5">
+                        Your Full Name
+                      </label>
+                      <div className="relative">
+                        <User className="w-4 h-4 text-[#8E89AA] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        <input
+                          type="text"
+                          value={form.name}
+                          onChange={update('name')}
+                          placeholder="e.g. John Doe"
+                          className={`w-full pl-10 pr-4 py-3 rounded-xl bg-white/[0.03] border text-white text-sm outline-none focus:border-[#66E8C3]/50 transition-colors ${
+                            errors.name ? 'border-red-400' : 'border-white/10'
+                          }`}
+                        />
+                      </div>
+                      {errors.name && (
+                        <p className="text-xs text-red-400 mt-1 font-mono">{errors.name}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="font-mono text-xs text-[#8E89AA] uppercase block mb-1.5">
+                        Email Address
+                      </label>
+                      <div className="relative">
+                        <Mail className="w-4 h-4 text-[#8E89AA] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        <input
+                          type="email"
+                          value={form.email}
+                          onChange={update('email')}
+                          placeholder="e.g. developer@college.edu"
+                          className={`w-full pl-10 pr-4 py-3 rounded-xl bg-white/[0.03] border text-white text-sm outline-none focus:border-[#66E8C3]/50 transition-colors ${
+                            errors.email ? 'border-red-400' : 'border-white/10'
+                          }`}
+                        />
+                      </div>
+                      {errors.email && (
+                        <p className="text-xs text-red-400 mt-1 font-mono">{errors.email}</p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="font-mono text-xs text-[#8E89AA] uppercase block mb-1.5">
+                        College / Institution
+                      </label>
+                      <div className="relative">
+                        <Building2 className="w-4 h-4 text-[#8E89AA] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                        <input
+                          type="text"
+                          value={form.college}
+                          onChange={update('college')}
+                          placeholder="e.g. Walchand College of Engineering"
+                          className={`w-full pl-10 pr-4 py-3 rounded-xl bg-white/[0.03] border text-white text-sm outline-none focus:border-[#66E8C3]/50 transition-colors ${
+                            errors.college ? 'border-red-400' : 'border-white/10'
+                          }`}
+                        />
+                      </div>
+                      {errors.college && (
+                        <p className="text-xs text-red-400 mt-1 font-mono">{errors.college}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="font-mono text-xs text-[#8E89AA] uppercase block mb-1.5">
+                        Preferred Track
+                      </label>
+                      <select
+                        value={form.track}
+                        onChange={update('track')}
+                        className="w-full px-4 py-3 rounded-xl bg-[#141226] border border-white/10 text-white text-sm outline-none focus:border-[#66E8C3]/50 transition-colors"
+                      >
+                        <option value="novice">Novice Track (1st & 2nd Year)</option>
+                        <option value="expert">Expert Track (3rd & 4th Year+)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="pt-4">
+                    <button
+                      type="submit"
+                      className="btn btn-primary w-full justify-center !py-3.5 text-sm font-bold flex items-center gap-2"
+                    >
+                      <Send className="w-4 h-4" />
+                      <span>SUBMIT PRIORITY REGISTRATION</span>
+                    </button>
+                  </div>
+                </form>
+              )}
+            </AnimatePresence>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

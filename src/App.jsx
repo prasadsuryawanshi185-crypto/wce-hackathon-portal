@@ -9,7 +9,9 @@ import { Highlights } from './sections/Highlights';
 import { Challenges } from './sections/Challenges';
 import { Timeline } from './sections/Timeline';
 import { Prizes } from './sections/Prizes';
+import { Organizers } from './sections/Organizers';
 import { Sponsors } from './sections/Sponsors';
+import { Venue } from './sections/Venue';
 import { Journey } from './sections/Journey';
 import { FAQ } from './sections/FAQ';
 import { FinalCTA } from './sections/FinalCTA';
@@ -19,7 +21,7 @@ function App() {
 
   useEffect(() => {
     // Ensure preloader doesn't stick around too long
-    const safety = setTimeout(() => setPreloaderDone(true), 8000);
+    const safety = setTimeout(() => setPreloaderDone(true), 4000);
     return () => clearTimeout(safety);
   }, []);
 
@@ -36,7 +38,7 @@ function App() {
   }
 
   return (
-    <div className="relative min-h-screen bg-[#07090d] text-[#f2f5f7] overflow-x-clip">
+    <div className="relative min-h-screen bg-[#0D0B1C] text-[#F7F5FF] overflow-x-clip">
       <GlobalScene />
       <div className="grid-overlay" aria-hidden="true" />
       <div className="noise-overlay" aria-hidden="true" />
@@ -50,7 +52,9 @@ function App() {
         <Challenges />
         <Timeline />
         <Prizes />
+        <Organizers />
         <Sponsors />
+        <Venue />
         <Journey />
         <FAQ />
         <FinalCTA />
