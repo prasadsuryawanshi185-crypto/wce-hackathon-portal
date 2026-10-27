@@ -48,7 +48,7 @@ export function Journey() {
           />
 
           <div className="space-y-12">
-            {eventData.journey.map((step, i) => (
+            {(eventData.journey || []).map((step, i) => (
               <Reveal key={step.step} delay={i * 0.05} x={-20} y={0}>
                 <div className="relative pl-10 sm:pl-14 group">
                   <span

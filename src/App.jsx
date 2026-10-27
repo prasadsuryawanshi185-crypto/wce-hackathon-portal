@@ -1,8 +1,6 @@
-import { useState, useEffect } from 'react';
 import { GlobalScene } from './components/GlobalScene';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { Preloader } from './components/Preloader';
 import { Hero } from './sections/Hero';
 import { About } from './sections/About';
 import { Highlights } from './sections/Highlights';
@@ -17,26 +15,6 @@ import { FAQ } from './sections/FAQ';
 import { FinalCTA } from './sections/FinalCTA';
 
 function App() {
-  const [preloaderDone, setPreloaderDone] = useState(false);
-
-  useEffect(() => {
-    // Ensure preloader doesn't stick around too long
-    const safety = setTimeout(() => setPreloaderDone(true), 4000);
-    return () => clearTimeout(safety);
-  }, []);
-
-  const handlePreloaderComplete = () => {
-    setPreloaderDone(true);
-  };
-
-  if (!preloaderDone) {
-    return (
-      <div className="bg-[#07090d]">
-        <Preloader onComplete={handlePreloaderComplete} />
-      </div>
-    );
-  }
-
   return (
     <div className="relative min-h-screen bg-[#0D0B1C] text-[#F7F5FF] overflow-x-clip">
       <GlobalScene />

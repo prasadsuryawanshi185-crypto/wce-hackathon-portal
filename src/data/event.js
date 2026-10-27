@@ -517,6 +517,64 @@ export const eventData = {
     ]
   },
 
+  journey: [
+    {
+      step: "01",
+      title: "Domain Discovery",
+      subtitle: "EXPLORE // DECONSTRUCT // IDENTIFY",
+      description: "Immerse your team in the released challenges. Deconstruct friction points in real-world systems across Novice and Expert domains.",
+      keyOutputs: [
+        "Select track (Novice vs Expert)",
+        "Pinpoint target challenge & user persona",
+        "Draft core value proposition and feasibility boundaries",
+      ],
+    },
+    {
+      step: "02",
+      title: "System Architecture",
+      subtitle: "BLUEPRINT // SCHEMATICS // SPECIFICATION",
+      description: "Translate conceptual ideas into concrete engineering specifications. Map out database schemas, data flow pipelines, and API contracts.",
+      keyOutputs: [
+        "Create high-level architecture diagrams",
+        "Finalize tech stack and component boundaries",
+        "Submit Round 1 proposal document for faculty evaluation",
+      ],
+    },
+    {
+      step: "03",
+      title: "The 24-Hour Crucible",
+      subtitle: "BUILD // CODE // ITERATE",
+      description: "Upon clearing Round 1 shortlisting, enter the 24-hour sprint at Walchand College of Engineering campus. Build rapidly, test edge cases, and push Git commits.",
+      keyOutputs: [
+        "24 continuous hours of hands-on hacking",
+        "Functional frontend interface + robust backend/hardware",
+        "Regular checkpoint code reviews with roaming mentors",
+      ],
+    },
+    {
+      step: "04",
+      title: "Mentor Checkpoints",
+      subtitle: "FEEDBACK // HARDENING // REFINEMENT",
+      description: "Engage with industry veterans and faculty evaluators during scheduled checkpoint reviews. Receive critical feedback on code structure and algorithmic efficiency.",
+      keyOutputs: [
+        "Checkpoint 1: Concept & architecture sanity check",
+        "Checkpoint 2: Mid-hack progress and code audit",
+        "Strategic pivot and performance optimization",
+      ],
+    },
+    {
+      step: "05",
+      title: "Live Demonstration",
+      subtitle: "PITCH // DEFEND // CONQUER",
+      description: "Take the main stage before the grand symposium jury. Deliver an uncompromising live demonstration of your working software or hardware prototype.",
+      keyOutputs: [
+        "5-minute live working demonstration",
+        "Technical defense during jury questioning",
+        "Recognition, awards, and networking at the closing ceremony",
+      ],
+    },
+  ],
+
   faqs: [
     {
       category: "general",
